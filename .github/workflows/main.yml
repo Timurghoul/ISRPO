@@ -29,4 +29,5 @@ jobs:
 
       # Запуск тестов
       - name: Run tests
-        run: python -m unittest tests.test1 tests.test2 tests.test3
+        run: python -m unittest
+
