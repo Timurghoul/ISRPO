@@ -1,0 +1,32 @@
+name: main
+
+on:
+  push:
+    branches: [ "second_branch" ]
+    
+jobs:
+  test:
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+
+    steps:
+      # Загружаем репозиторий
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      # Устанавливаем Python нужной версии
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.11"
+
+      # Устанавливаем зависимости (если есть файл requirements.txt)
+      - name: Install deps
+        run: pip install -r requirements.txt
+
+      # Запуск тестов
+      - name: Run tests
+        run: python -m unittest tests.test1 tests.test2 tests.test3
